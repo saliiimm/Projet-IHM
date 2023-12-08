@@ -105,7 +105,25 @@ public class MainPage extends JFrame {
         JLabel img = new JLabel(resizedIcon6);
         search.add(img);
         search.setLayout(new BoxLayout(search, BoxLayout.X_AXIS));
-
+    JPanel titles=new JPanel();
+    JLabel title=new JLabel("Title") ;
+    JLabel Category=new JLabel("Category") ;
+    JLabel auteur=new JLabel("Auteur") ;
+    JLabel theme=new JLabel("Theme") ;
+      Font font = new Font("Inter", Font.PLAIN, 16);
+        title.setFont(font);
+        Category.setFont(font);
+        auteur.setFont(font);
+        theme.setFont(font);
+     title.setPreferredSize(new Dimension(80, 100));
+      Category.setPreferredSize(new Dimension(80, 100));
+       auteur.setPreferredSize(new Dimension(80, 100));
+        theme.setPreferredSize(new Dimension(80, 100));
+    titles.add(title);
+     titles.add(auteur);
+    titles.add(Category);
+    titles.add(theme);
+      titles.setLayout(new BoxLayout(titles, BoxLayout.X_AXIS));
         JPanel main = new JPanel();
         ul.setPreferredSize(new Dimension(300, 100));
 
@@ -147,11 +165,17 @@ public class MainPage extends JFrame {
        elmntBox.setBackground(Color.WHITE);
            elmntBox.setLayout(new BoxLayout(elmntBox, BoxLayout.X_AXIS));
            elmntBox.setLayout(new FlowLayout(FlowLayout.LEFT, 100, 30));
+          
+             contBox.add(titles);
+               titles.setLayout(new FlowLayout(FlowLayout.LEFT, 100, 30));
             contBox.add(elmntBox);
         
          
        JLabel titleBox=new JLabel("harry poter");
        JLabel auteurJLabel=new JLabel("auteur");
+       JLabel CategoryJLabel=new JLabel("Category");
+       JLabel themeJLabel=new JLabel("theme");
+      
        ImageIcon icondeletIcon = new ImageIcon("src\\assets\\trash-solid.png");
          
         Image originalImageD = icondeletIcon.getImage();
@@ -217,13 +241,20 @@ public class MainPage extends JFrame {
        btndeleButton.add(image);
        
       
+     titleBox.setPreferredSize(new Dimension(80, 50));
+     auteurJLabel.setPreferredSize(new Dimension(80, 50));
+     CategoryJLabel.setPreferredSize(new Dimension(80, 50));
+     themeJLabel.setPreferredSize(new Dimension(80, 50));
      
        elmntBox.add(titleBox);
        elmntBox.add(auteurJLabel);
+       elmntBox.add(CategoryJLabel);
+       elmntBox.add(themeJLabel);
        elmntBox.add(btndeleButton);
         this.add(sideBar, BorderLayout.WEST);
         this.add(main, BorderLayout.CENTER);
         main.add(search, BorderLayout.NORTH);
+       
         main.add(contBox, BorderLayout.CENTER);
     
         int parentWidth = main.getWidth();
@@ -250,6 +281,7 @@ public class MainPage extends JFrame {
                 int childWidth2 = (int) (parentWidth * 0.8);
                 searchField.setPreferredSize(new Dimension(childWidth2, 30));
                 elmntBox.setPreferredSize(new Dimension(childWidth, 100));
+                titles.setPreferredSize(new Dimension(childWidth, 100));
                 contBox.setPreferredSize(new Dimension(parentWidth, parentHeight));
                 searchField.setBackground(Color.WHITE);
                 search.setPreferredSize(new Dimension(childWidth, 50));
