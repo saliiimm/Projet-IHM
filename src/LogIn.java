@@ -79,7 +79,7 @@ class ImagePanel extends JPanel {
         setSize(1500, 1000);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-
+        
         
        
         // Créer un panel pour le contenu centré
@@ -144,18 +144,22 @@ class ImagePanel extends JPanel {
         emailPanel.setMinimumSize(new Dimension(305, 75));
         emailPanel.setMaximumSize(new Dimension(305, 75));
         emailPanel.setBackground(Color.WHITE);
+
         JPanel topEmailPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         topEmailPanel.setBackground(Color.WHITE);
         topEmailPanel.add(new JLabel("Email"));
+
         emailPanel.add(topEmailPanel);
-       JPanel secondEmailPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-       secondEmailPanel.setBackground(Color.WHITE);
+
+        JPanel secondEmailPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        secondEmailPanel.setBackground(Color.WHITE);
         JTextField emailField = new JTextField(SwingConstants.CENTER);
         emailField.setToolTipText("Enter your email");
         setComponentSize(emailField, 300, 30);
-         emailField.setBorder(new LineBorder(Color.decode("#DCD9D9"), 2, true));
+        emailField.setBorder(new LineBorder(Color.decode("#DCD9D9"), 2, true));
 
         secondEmailPanel.add(emailField);
+        
         emailPanel.add(topEmailPanel);
         emailPanel.add(secondEmailPanel);
         contentPanel.add(emailPanel);
@@ -165,23 +169,27 @@ class ImagePanel extends JPanel {
          contentPanel.add(Box.createVerticalStrut(20));
 
         // Create a panel for password components
-         JPanel passwordPanel = new JPanel(new GridLayout(2, 1));
-         passwordPanel.setPreferredSize(new Dimension(305, 75));
+        JPanel passwordPanel = new JPanel(new GridLayout(2, 1));
+        passwordPanel.setPreferredSize(new Dimension(305, 75));
         passwordPanel.setMinimumSize(new Dimension(305, 75));
         passwordPanel.setMaximumSize(new Dimension(305, 75));
         passwordPanel.setBackground(Color.WHITE);
+
         JPanel topPasswordPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         topPasswordPanel.setBackground(Color.WHITE);
         topPasswordPanel.add(new JLabel("Password"));
+
         passwordPanel.add(topPasswordPanel);
+
         JPanel bottomPasswordPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         bottomPasswordPanel.setBackground(Color.WHITE);
-       PasswordFieldWithVisibility passwordField = new PasswordFieldWithVisibility();
-passwordField.setToolTipText("Enter your password");
-setComponentSize(passwordField, 300, 30);
-passwordField.setBorder(new LineBorder(Color.decode("#DCD9D9"), 2, true));
-bottomPasswordPanel.add(passwordField);
+        PasswordFieldWithVisibility passwordField = new PasswordFieldWithVisibility();
+        passwordField.setToolTipText("Enter your password");
+        setComponentSize(passwordField, 300, 30);
+        passwordField.setBorder(new LineBorder(Color.decode("#DCD9D9"), 2, true));
         bottomPasswordPanel.add(passwordField);
+        bottomPasswordPanel.add(passwordField);
+
         passwordPanel.add(bottomPasswordPanel);
         
         contentPanel.add(passwordPanel);
