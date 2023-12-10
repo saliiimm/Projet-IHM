@@ -1,80 +1,15 @@
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-import java.awt.event.MouseEvent;
+import CustomPasswordField.PasswordFieldWithVisibility;
+import java.awt.event.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
 import java.sql.*;
 
 
 public class LogIn extends JFrame {
 
-    
-public class PasswordFieldWithVisibility extends JPasswordField {
 
-    private boolean passwordVisible = false;
-
-    public PasswordFieldWithVisibility() {
-      
-
-        // Ajouter une icône d'œil
-        Icon showIcon = new ImageIcon("src/assets/eyeoff.png"); // Remplacez par le chemin de votre icône
-        JButton showButton = new JButton(showIcon);
-        showButton.setBorderPainted(false);
-        showButton.setContentAreaFilled(false);
-        showButton.setFocusPainted(false);
-        showButton.setOpaque(false);
-        showButton.setFocusable(false);
-        showButton.setCursor(new Cursor(Cursor.HAND_CURSOR)); 
-        showButton.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent evt) {
-                passwordVisible = !passwordVisible; // Inverser l'état actuel
-
-                if (passwordVisible) {
-                    setEchoChar((char) 0);
-                    showButton.setIcon(new ImageIcon("src/assets/eyeon.png"));
-                } else {
-                    setEchoChar('\u2022');
-                    showButton.setIcon(new ImageIcon("src/assets/eyeoff.png"));
-                }
-            }
-        });
-       
-
-        // Ajouter le bouton à droite du champ de mot de passe
-        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-        add(Box.createHorizontalGlue());
-        add(showButton);
-    }
-}
-class ImagePanel extends JPanel {
-
-  private Image img;
-
-  public ImagePanel(String img) {
-    this(new ImageIcon(img).getImage());
-  }
-
-  public ImagePanel(Image img) {
-    this.img = img;
-    Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
-    setPreferredSize(size);
-    setMinimumSize(size);
-    setMaximumSize(size);
-    setSize(size);
-    setLayout(null);
-  }
-
-  public void paintComponent(Graphics g) {
-    g.drawImage(img, 0, 0, null);
-  }
-
-}
-
-
-    public LogIn
-    () {
+    public LogIn() {
         setTitle("Login Page");
         setSize(1500, 1000);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -104,9 +39,9 @@ class ImagePanel extends JPanel {
         JLabel label = new JLabel(resizedIcon);
         JPanel logo = new JPanel();
         logo.add(label);
-         logo.setPreferredSize(new Dimension(150, 85));
-    logo.setMinimumSize(new Dimension(150, 85));
-    logo.setMaximumSize(new Dimension(150, 85));
+        logo.setPreferredSize(new Dimension(150, 85));
+        logo.setMinimumSize(new Dimension(150, 85));
+        logo.setMaximumSize(new Dimension(150, 85));
         logo.setBackground(Color.WHITE);
         contentPanel.add(logo);
 
