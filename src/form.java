@@ -1,18 +1,12 @@
 import javax.swing.*;
-import javax.swing.border.AbstractBorder;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 import javax.swing.plaf.ColorUIResource;
+import CustomJComboBox.ComboBoxSuggestion;
+import CustomTextField.PlaceholderTextField;
 import java.awt.*;
-
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.awt.geom.RoundRectangle2D;
-
+import java.sql.*;
 public class form extends JFrame {
 
     public form() {
@@ -183,7 +177,7 @@ public class form extends JFrame {
                 int width = getWidth();
                 int height = getHeight();
             
-                RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(0, 0, width - 1, height - 1, 20, 20);
+                RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(1, 0, width - 1, height - 1, 20, 20);
                 g2d.draw(roundedRectangle);
             
                 g2d.dispose();
@@ -221,16 +215,18 @@ public class form extends JFrame {
                 int width = getWidth();
                 int height = getHeight();
             
-                RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(0, 0, width - 1, height - 1, 20, 20);
+                RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(1, 0, width - 1, height - 1, 20, 20);
                 g2d.draw(roundedRectangle);
             
                 g2d.dispose();
             }
 
         };
-        PlaceholderTextField prof = new PlaceholderTextField("Framer");
-           JPanel profP = new JPanel(){
-            @Override
+
+        ComboBoxSuggestion<String> profComboBox = new ComboBoxSuggestion<String>();
+        populateProfessorComboBox(profComboBox); 
+        JPanel profP = new JPanel() {
+    @Override
             protected void paintComponent(Graphics g) {
                 Graphics2D g2d = (Graphics2D) g.create();
                 g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -247,7 +243,8 @@ public class form extends JFrame {
 
                 g2d.dispose();
             }
-            @Override
+
+     @Override
             protected void paintBorder(Graphics g) {
                 Graphics2D g2d = (Graphics2D) g.create();
                 g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -258,13 +255,14 @@ public class form extends JFrame {
                 int width = getWidth();
                 int height = getHeight();
             
-                RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(0, 0, width - 1, height - 1, 20, 20);
+                RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(1, 3, width - 1, height - 10, 20, 20);
                 g2d.draw(roundedRectangle);
             
                 g2d.dispose();
             }
+};
 
-        };
+     
         PlaceholderTextField theme = new PlaceholderTextField("Theme");
            JPanel themeP = new JPanel(){
             @Override
@@ -278,7 +276,6 @@ public class form extends JFrame {
                 RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(0, 0, width, height, 20, 20);
                 g2d.setColor(Color.WHITE);
                 g2d.fill(roundedRectangle);
-
                
                 g2d.draw(roundedRectangle);
 
@@ -295,7 +292,7 @@ public class form extends JFrame {
                 int width = getWidth();
                 int height = getHeight();
             
-                RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(0, 0, width - 1, height - 1, 20, 20);
+                RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(1, 0, width - 1, height - 1, 20, 20);
                 g2d.draw(roundedRectangle);
             
                 g2d.dispose();
@@ -324,14 +321,14 @@ public class form extends JFrame {
         form.add(etudiantP);
          etudiant.setPreferredSize(new Dimension(360, 40));
         form.add(Box.createVerticalStrut(20));
-        profP.add(prof);
-         prof.setPreferredSize(new Dimension(360, 40));
+        profP.add(profComboBox);
+        profComboBox.setPreferredSize(new Dimension(360, 40));
         form.add(profP);
         form.add(Box.createVerticalStrut(20));
         themeP.add(theme);
-            theme.setPreferredSize(new Dimension(360, 40));
+        theme.setPreferredSize(new Dimension(360, 40));
         form.add(themeP);
-          form.add(Box.createVerticalStrut(20));
+        form.add(Box.createVerticalStrut(20));
         form.setBackground(Color.WHITE);
         form.setLayout(new BoxLayout(form, BoxLayout.Y_AXIS));
          JButton Submit=new JButton("Submit");
@@ -393,71 +390,80 @@ public class form extends JFrame {
             }
         });
 
+
+
+          Submit.addActionListener(new ActionListener() {
+
+    public void actionPerformed(ActionEvent e) {
+        String titreMInput = titreM.getText();
+        String etudiantInput = etudiant.getText();
+         String profInput = (String) profComboBox.getSelectedItem();
+        String themeInput = theme.getText();
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/porjet_ihm", "ihm", "ihm");
+
+            // Utilisation d'un PreparedStatement avec des paramètres de substitution
+            PreparedStatement st = connection.prepareStatement(
+                "INSERT INTO memoire (titre, auteurs, profEncadrant, theme) " +
+                "VALUES (?, ?, (SELECT id FROM enseignant WHERE fullName = ?), ?)");
+
+            // Définir les valeurs des paramètres
+            st.setString(1, titreMInput);
+            st.setString(2, etudiantInput);
+            st.setString(3, profInput);
+            st.setString(4, themeInput);
+
+            // Exécuter la requête d'insertion
+            int rowsAffected = st.executeUpdate();
+
+            if (rowsAffected > 0) {
+                JOptionPane.showMessageDialog(Submit, "You have successfully added a new memoire");
+                titreM.setText("");
+                etudiant.setText("");
+                profComboBox.setSelectedIndex(-1);
+                theme.setText("");
+            } else {
+                JOptionPane.showMessageDialog(Submit, "Failed to add a new memoire");
+            }
+
+            // Fermer la connexion
+            connection.close();
+        } catch (ClassNotFoundException | SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+});
+
+    
+
+
+
+
         setVisible(true);
     }
 
-   public class PlaceholderTextField extends JTextField {
+            private void populateProfessorComboBox(ComboBoxSuggestion<String> profComboBox) {
+    try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/porjet_ihm", "ihm", "ihm");
 
-    private String placeholder;
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT fullName FROM enseignant");
 
-    public PlaceholderTextField(String placeholder) {
-        this.placeholder = placeholder;
-        setForeground(Color.GRAY);
-        setText(placeholder);
-     
-        setMargin(new Insets(10, 10, 10, 10)); // Ajout de padding
-
-        addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                if (getText().equals(placeholder)) {
-                    setText("");
-                    setForeground(Color.BLACK);
-                }
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                if (getText().isEmpty()) {
-                    setText(placeholder);
-                    setForeground(Color.GRAY);
-                }
-            }
-        });
-    }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g.create();
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-        g2d.setColor(Color.WHITE);
-       
-
-        super.paintComponent(g); // Appel à la méthode paintComponent de la classe mère
-
-        g2d.dispose();
-    }
-    protected void paintBorder(Graphics g) {
-        // Ne rien faire ici pour éviter le dessin du bord par défaut
-    }
-
-  
-
-    private class RoundBorder extends AbstractBorder {
-        @Override
-        public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-            Graphics2D g2d = (Graphics2D) g.create();
-            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-            RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(0, 0, width - 1, height - 1, 20, 20);
-            g2d.setColor(Color.WHITE);
-            g2d.draw(roundedRectangle);
-
-            g2d.dispose();
+        while (resultSet.next()) {
+            String fullName = resultSet.getString("fullName");
+            profComboBox.addItem(fullName);
         }
+
+        connection.close();
+    } catch (ClassNotFoundException | SQLException e) {
+        e.printStackTrace();
     }
 }
+
+
 
     private JPanel createLabelAndIconPanel(String labelText, ImageIcon icon) {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
