@@ -1,33 +1,17 @@
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.plaf.ColorUIResource;
-import CustomJComboBox.ComboBoxSuggestion;
 import CustomTextField.PlaceholderTextField;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.RoundRectangle2D;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.sql.*;
-import org.apache.commons.io.FileUtils;
 
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+public class profForm extends JFrame {
 
-public class form extends JFrame {
 
-    
-       private String pdfFilePath;
-
-        private byte[] readFileToByteArray(String filePath) throws IOException {
-        File file = new File(filePath);
-        return FileUtils.readFileToByteArray(file);
-    }
-
-    public form() {
+    public profForm() {
         this.setTitle("My Book Shelf");
         setSize(1500, 1000);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -123,7 +107,6 @@ public class form extends JFrame {
         search.setLayout(new BoxLayout(search, BoxLayout.X_AXIS));
 
         JPanel main = new JPanel();
-     
         ul.setPreferredSize(new Dimension(300, 100));
 
         JPanel homePanel = createLabelAndIconPanel("Home", resizedIcon1);
@@ -161,17 +144,13 @@ public class form extends JFrame {
                 g2d.dispose();
             }
         };
-           JPanel teacherMain=new JPanel();
-        JPanel memoireMain=new JPanel();
         elmntBox.setBackground(Color.WHITE);
         elmntBox.setLayout(new BoxLayout(elmntBox, BoxLayout.X_AXIS));
         elmntBox.setLayout(new FlowLayout(FlowLayout.LEFT, 100, 30));
-        contBox.add(elmntBox,"card1");
-        contBox.add(teacherMain,"card2");
-        contBox.add(memoireMain,"card3");
-      
-        PlaceholderTextField titreM = new PlaceholderTextField("Title");
-        JPanel titreMP = new JPanel(){
+        contBox.add(elmntBox);
+
+        PlaceholderTextField FullNameProf = new PlaceholderTextField("Title");
+        JPanel FullNameProfP = new JPanel(){
             @Override
             protected void paintComponent(Graphics g) {
                 Graphics2D g2d = (Graphics2D) g.create();
@@ -208,8 +187,8 @@ public class form extends JFrame {
 
         };
         
-        PlaceholderTextField etudiant = new PlaceholderTextField("Student(Monomial,Binomial,Trinomial)");
-           JPanel etudiantP = new JPanel(){
+        PlaceholderTextField Spécialité = new PlaceholderTextField("Student(Monomial,Binomial,Trinomial)");
+           JPanel SpécialitéP = new JPanel(){
             @Override
             protected void paintComponent(Graphics g) {
                 Graphics2D g2d = (Graphics2D) g.create();
@@ -246,144 +225,6 @@ public class form extends JFrame {
 
         };
 
-        ComboBoxSuggestion<String> profComboBox = new ComboBoxSuggestion<String>();
-        populateProfessorComboBox(profComboBox); 
-        JPanel profP = new JPanel() {
-    @Override
-            protected void paintComponent(Graphics g) {
-                Graphics2D g2d = (Graphics2D) g.create();
-                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-                int width = getWidth();
-                int height = getHeight();
-    
-                RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(0, 0, width, height, 20, 20);
-                g2d.setColor(Color.WHITE);
-                g2d.fill(roundedRectangle);
-
-               
-                g2d.draw(roundedRectangle);
-
-                g2d.dispose();
-            }
-
-     @Override
-            protected void paintBorder(Graphics g) {
-                Graphics2D g2d = (Graphics2D) g.create();
-                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            
-                g2d.setColor(Color.GRAY); // Couleur de la bordure
-                g2d.setStroke(new BasicStroke(1)); // Épaisseur de la bordure
-            
-                int width = getWidth();
-                int height = getHeight();
-            
-                RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(1, 3, width - 1, height - 10, 20, 20);
-                g2d.draw(roundedRectangle);
-            
-                g2d.dispose();
-            }
-};
-
-     
-        PlaceholderTextField theme = new PlaceholderTextField("Theme");
-           JPanel themeP = new JPanel(){
-            @Override
-            protected void paintComponent(Graphics g) {
-                Graphics2D g2d = (Graphics2D) g.create();
-                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-                int width = getWidth();
-                int height = getHeight();
-    
-                RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(0, 0, width, height, 20, 20);
-                g2d.setColor(Color.WHITE);
-                g2d.fill(roundedRectangle);
-               
-                g2d.draw(roundedRectangle);
-
-                g2d.dispose();
-            }
-            @Override
-            protected void paintBorder(Graphics g) {
-                Graphics2D g2d = (Graphics2D) g.create();
-                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            
-                g2d.setColor(Color.GRAY); // Couleur de la bordure
-                g2d.setStroke(new BasicStroke(1)); // Épaisseur de la bordure
-            
-                int width = getWidth();
-                int height = getHeight();
-            
-                RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(1, 1, width - 1, height - 2, 20, 20);
-                g2d.draw(roundedRectangle);
-            
-                g2d.dispose();
-            }
-
-        };
-
-          PlaceholderTextField resumé = new PlaceholderTextField("resumé");
-           JPanel resuméP = new JPanel(){
-            @Override
-            protected void paintComponent(Graphics g) {
-                Graphics2D g2d = (Graphics2D) g.create();
-                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-                int width = getWidth();
-                int height = getHeight();
-    
-                RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(0, 0, width, height, 20, 20);
-                g2d.setColor(Color.WHITE);
-                g2d.fill(roundedRectangle);
-               
-                g2d.draw(roundedRectangle);
-
-                g2d.dispose();
-            }
-            @Override
-            protected void paintBorder(Graphics g) {
-                Graphics2D g2d = (Graphics2D) g.create();
-                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            
-                g2d.setColor(Color.GRAY); // Couleur de la bordure
-                g2d.setStroke(new BasicStroke(1)); // Épaisseur de la bordure
-            
-                int width = getWidth();
-                int height = getHeight();
-            
-                RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(1, 0, width - 1, height - 1, 20, 20);
-                g2d.draw(roundedRectangle);
-            
-                g2d.dispose();
-            }
-
-        };
-
-        JFileChooser fileChooser = new JFileChooser();
-
-        JButton addPDFButton = new JButton("Add PDF");
-        addPDFButton.setBackground(Color.decode("#FA7C54"));
-        setComponentSize(addPDFButton, 70, 30);
-        addPDFButton.setVerticalAlignment(SwingConstants.CENTER);
-        addPDFButton.setHorizontalAlignment(SwingConstants.CENTER);
-        addPDFButton.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-        addPDFButton.setCursor(new Cursor(Cursor.HAND_CURSOR)); 
-
-
-  addPDFButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setFileFilter(new FileNameExtensionFilter("PDF files", "pdf"));
-
-                int result = fileChooser.showOpenDialog(form.this);
-                if (result == JFileChooser.APPROVE_OPTION) {
-                    File selectedFile = fileChooser.getSelectedFile();
-                    pdfFilePath = selectedFile.getAbsolutePath();
-                }
-            }
-        });
 
 
 
@@ -403,27 +244,14 @@ public class form extends JFrame {
     addtitle.setBackground(Color.WHITE);
         form.add(addtitle);
          form.add(Box.createVerticalStrut(20));
-        titreMP.add(titreM);
-        form.add(titreMP);
-         titreM.setPreferredSize(new Dimension(360, 40));
+        FullNameProfP.add(FullNameProf);
+        form.add(FullNameProfP);
+         FullNameProfP.setPreferredSize(new Dimension(360, 40));
         form.add(Box.createVerticalStrut(20));
-        etudiantP.add(etudiant);
-        form.add(etudiantP);
-         etudiant.setPreferredSize(new Dimension(360, 40));
+        SpécialitéP.add(Spécialité);
+        form.add(SpécialitéP);
+         Spécialité.setPreferredSize(new Dimension(360, 40));
         form.add(Box.createVerticalStrut(20));
-        profP.add(profComboBox);
-        profComboBox.setPreferredSize(new Dimension(360, 40));
-        form.add(profP);
-        form.add(Box.createVerticalStrut(20));
-        themeP.add(theme);
-        theme.setPreferredSize(new Dimension(360, 40));
-        form.add(themeP);
-        form.add(Box.createVerticalStrut(20));
-         resuméP.add(resumé);
-        resumé.setPreferredSize(new Dimension(360, 40));
-        form.add(resuméP);
-        form.add(Box.createVerticalStrut(20));
-        form.add(addPDFButton);
         form.setBackground(Color.WHITE);
         form.setLayout(new BoxLayout(form, BoxLayout.Y_AXIS));
          JButton Submit=new JButton("Submit");
@@ -490,45 +318,30 @@ public class form extends JFrame {
           Submit.addActionListener(new ActionListener() {
 
     public void actionPerformed(ActionEvent e) {
-        String titreMInput = titreM.getText();
-        String etudiantInput = etudiant.getText();
-        String profInput = (String) profComboBox.getSelectedItem();
-        String themeInput = theme.getText();
-        String resuméInput = resumé.getText();
-        byte[] pdfContent = new byte[0];
-    try {
-        pdfContent = readFileToByteArray(pdfFilePath);
-    } catch (IOException e1) {
-        e1.printStackTrace();
-    }
+        String FullNameProfInput = FullNameProf.getText();
+        String SpécialitéInput = Spécialité.getText();
+  
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3307/porjet_ihm", "ihm", "ihm");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/porjet_ihm", "ihm", "ihm");
 
             // Utilisation d'un PreparedStatement avec des paramètres de substitution
             PreparedStatement st = connection.prepareStatement(
-                "INSERT INTO memoire (titre, auteurs, profEncadrant, theme,pdfContent,resume) " +
-                "VALUES (?, ?, (SELECT id FROM enseignant WHERE fullName = ?), ?,?,?)");
+                "INSERT INTO enseignant (fullName, specialite) " +
+                "VALUES (?, ?)");
 
             // Définir les valeurs des paramètres
-            st.setString(1, titreMInput);
-            st.setString(2, etudiantInput);
-            st.setString(3, profInput);
-            st.setString(4, themeInput);
-            st.setBytes(5,pdfContent);
-            st.setString(6, resuméInput);
+            st.setString(1, FullNameProfInput);
+            st.setString(2, SpécialitéInput);
 
             // Exécuter la requête d'insertion
             int rowsAffected = st.executeUpdate();
 
             if (rowsAffected > 0) {
                 JOptionPane.showMessageDialog(Submit, "You have successfully added a new memoire");
-                titreM.setText("");
-                etudiant.setText("");
-                profComboBox.setSelectedIndex(-1);
-                theme.setText("");
-                resumé.setText("");
+                FullNameProf.setText("");
+                Spécialité.setText("");
             } else {
                 JOptionPane.showMessageDialog(Submit, "Failed to add a new memoire");
             }
@@ -549,24 +362,6 @@ public class form extends JFrame {
         setVisible(true);
     }
 
-            private void populateProfessorComboBox(ComboBoxSuggestion<String> profComboBox) {
-    try {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3307/porjet_ihm", "ihm", "ihm");
-
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT fullName FROM enseignant");
-
-        while (resultSet.next()) {
-            String fullName = resultSet.getString("fullName");
-            profComboBox.addItem(fullName);
-        }
-
-        connection.close();
-    } catch (ClassNotFoundException | SQLException e) {
-        e.printStackTrace();
-    }
-}
 
     private void setComponentSize(JComponent component, int width, int height) {
     component.setPreferredSize(new Dimension(width, height));
@@ -591,6 +386,7 @@ public class form extends JFrame {
     }
 
     public static void main(String[] args) {
-        new form();
+        new profForm();
     }
 }
+
