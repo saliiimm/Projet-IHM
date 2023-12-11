@@ -181,7 +181,7 @@ public class LogIn extends JFrame {
                     e1.printStackTrace();
                 }
                 try {
-                    Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/porjet_ihm",
+                    Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3307/porjet_ihm",
                         "ihm", "ihm");
 
                     PreparedStatement st = (PreparedStatement) connection
