@@ -11,6 +11,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
+import java.time.Year;
+
 import org.apache.commons.io.FileUtils;
 
 
@@ -192,7 +194,7 @@ public class form extends JFrame {
                 int width = getWidth();
                 int height = getHeight();
             
-                RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(1, 0, width - 1, height - 1, 20, 20);
+                RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(1, 0, width - 2, height - 1, 20, 20);
                 g2d.draw(roundedRectangle);
             
                 g2d.dispose();
@@ -230,7 +232,7 @@ public class form extends JFrame {
                 int width = getWidth();
                 int height = getHeight();
             
-                RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(1, 0, width - 1, height - 1, 20, 20);
+                RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(1, 0, width - 2, height - 1, 20, 20);
                 g2d.draw(roundedRectangle);
             
                 g2d.dispose();
@@ -270,13 +272,94 @@ public class form extends JFrame {
                 int width = getWidth();
                 int height = getHeight();
             
-                RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(1, 3, width - 1, height - 10, 20, 20);
+                RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(1, 3, width - 2, height - 10, 20, 20);
                 g2d.draw(roundedRectangle);
             
                 g2d.dispose();
             }
 };
 
+
+  ComboBoxSuggestion<Integer> yearComboBox = new ComboBoxSuggestion<Integer>();
+  
+// Populate the 'annee' JComboBox with years from 1999 to the current year
+int currentYear = Year.now().getValue();
+for (int year = 1999; year <= currentYear; year++) {
+    yearComboBox.addItem(year);
+}
+        JPanel yearP = new JPanel() {
+    @Override
+            protected void paintComponent(Graphics g) {
+                Graphics2D g2d = (Graphics2D) g.create();
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+                int width = getWidth();
+                int height = getHeight();
+    
+                RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(0, 0, width, height, 20, 20);
+                g2d.setColor(Color.WHITE);
+                g2d.fill(roundedRectangle);
+
+               
+                g2d.draw(roundedRectangle);
+
+                g2d.dispose();
+            }
+
+     @Override
+            protected void paintBorder(Graphics g) {
+                Graphics2D g2d = (Graphics2D) g.create();
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            
+                g2d.setColor(Color.GRAY); // Couleur de la bordure
+                g2d.setStroke(new BasicStroke(1)); // Épaisseur de la bordure
+            
+                int width = getWidth();
+                int height = getHeight();
+            
+                RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(1, 3, width - 2, height - 10, 20, 20);
+                g2d.draw(roundedRectangle);
+            
+                g2d.dispose();
+            }
+};
+
+ PlaceholderTextField code = new PlaceholderTextField("Code mémoire");
+           JPanel codeP = new JPanel(){
+            @Override
+            protected void paintComponent(Graphics g) {
+                Graphics2D g2d = (Graphics2D) g.create();
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+                int width = getWidth();
+                int height = getHeight();
+    
+                RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(0, 0, width, height, 20, 20);
+                g2d.setColor(Color.WHITE);
+                g2d.fill(roundedRectangle);
+               
+                g2d.draw(roundedRectangle);
+
+                g2d.dispose();
+            }
+            @Override
+            protected void paintBorder(Graphics g) {
+                Graphics2D g2d = (Graphics2D) g.create();
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            
+                g2d.setColor(Color.GRAY); // Couleur de la bordure
+                g2d.setStroke(new BasicStroke(1)); // Épaisseur de la bordure
+            
+                int width = getWidth();
+                int height = getHeight();
+            
+                RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(1, 1, width - 2, height - 1, 20, 20);
+                g2d.draw(roundedRectangle);
+            
+                g2d.dispose();
+            }
+
+        };
      
         PlaceholderTextField theme = new PlaceholderTextField("Theme");
            JPanel themeP = new JPanel(){
@@ -307,7 +390,7 @@ public class form extends JFrame {
                 int width = getWidth();
                 int height = getHeight();
             
-                RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(1, 1, width - 1, height - 2, 20, 20);
+                RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(1, 1, width - 2, height - 2, 20, 20);
                 g2d.draw(roundedRectangle);
             
                 g2d.dispose();
@@ -344,7 +427,7 @@ public class form extends JFrame {
                 int width = getWidth();
                 int height = getHeight();
             
-                RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(1, 0, width - 1, height - 1, 20, 20);
+                RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(1, 0, width - 2, height - 1, 20, 20);
                 g2d.draw(roundedRectangle);
             
                 g2d.dispose();
@@ -384,7 +467,7 @@ public class form extends JFrame {
         
        
    JPanel form=new JPanel();
-    form.setPreferredSize(new Dimension(400, 500));
+    form.setPreferredSize(new Dimension(420, 630));
     JLabel addtitLabel=new JLabel("Fill up Thesis Details");
     JPanel addtitle=new JPanel();
     addtitle.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -394,27 +477,37 @@ public class form extends JFrame {
     addtitle.add(addtitLabel);
     addtitle.setBackground(Color.WHITE);
         form.add(addtitle);
-         form.add(Box.createVerticalStrut(20));
+         form.add(Box.createVerticalStrut(15));
         titreMP.add(titreM);
         form.add(titreMP);
-         titreM.setPreferredSize(new Dimension(360, 40));
-        form.add(Box.createVerticalStrut(20));
+         titreM.setPreferredSize(new Dimension(360, 35));
+        form.add(Box.createVerticalStrut(15));
         etudiantP.add(etudiant);
         form.add(etudiantP);
-         etudiant.setPreferredSize(new Dimension(360, 40));
-        form.add(Box.createVerticalStrut(20));
+         etudiant.setPreferredSize(new Dimension(360, 35));
+        form.add(Box.createVerticalStrut(15));
         profP.add(profComboBox);
         profComboBox.setPreferredSize(new Dimension(360, 40));
         form.add(profP);
-        form.add(Box.createVerticalStrut(20));
+        form.add(Box.createVerticalStrut(15));
+        yearP.add(yearComboBox);
+        yearComboBox.setPreferredSize(new Dimension(360, 40));
+        yearComboBox.setMinimumSize(new Dimension(360, 40));
+        yearComboBox.setMaximumSize(new Dimension(360, 40));
+        form.add(yearP);
+        form.add(Box.createVerticalStrut(15));
+         codeP.add(code);
+        code.setPreferredSize(new Dimension(360, 35));
+        form.add(codeP);
+        form.add(Box.createVerticalStrut(15));
         themeP.add(theme);
-        theme.setPreferredSize(new Dimension(360, 40));
+        theme.setPreferredSize(new Dimension(360, 35));
         form.add(themeP);
-        form.add(Box.createVerticalStrut(20));
+        form.add(Box.createVerticalStrut(15));
          resuméP.add(resumé);
-        resumé.setPreferredSize(new Dimension(360, 40));
+        resumé.setPreferredSize(new Dimension(360, 35));
         form.add(resuméP);
-        form.add(Box.createVerticalStrut(20));
+        form.add(Box.createVerticalStrut(15));
         form.add(addPDFButton);
         form.setBackground(Color.WHITE);
         form.setLayout(new BoxLayout(form, BoxLayout.Y_AXIS));
@@ -426,6 +519,8 @@ public class form extends JFrame {
           SubmitP.setPreferredSize(new Dimension(360, 40));
               SubmitP.add(Submit);
          form.add(SubmitP);
+                 form.add(Box.createVerticalStrut(15));
+
        ;
        SubmitP.setLayout(new FlowLayout(FlowLayout.LEFT));
            Submit.setBorder(new EmptyBorder(padding, 20, padding, 20));
@@ -443,7 +538,7 @@ public class form extends JFrame {
         main.add(search, BorderLayout.NORTH);
 
         main.add(contBox, BorderLayout.CENTER);
-        contBox.setBorder(new EmptyBorder(100, 0, 0, 0));
+        contBox.setBorder(new EmptyBorder(50, 0, 0, 0));
         int parentWidth = main.getWidth();
         int childWidth = (int) (parentWidth * 0.8);
         search.setBorder(new EmptyBorder(padding, padding, padding, padding));
@@ -468,7 +563,7 @@ public class form extends JFrame {
                 int childWidth2 = (int) (parentWidth * 0.8);
                 int childWidth3 = (int) (parentWidth * 0.5);
                 searchField.setPreferredSize(new Dimension(childWidth2, 30));
-                elmntBox.setPreferredSize(new Dimension(childWidth3, 600));
+                elmntBox.setPreferredSize(new Dimension(childWidth3, 650));
 
                 contBox.setPreferredSize(new Dimension(parentWidth, parentHeight));
                 searchField.setBackground(Color.WHITE);
@@ -485,7 +580,9 @@ public class form extends JFrame {
         String titreMInput = titreM.getText();
         String etudiantInput = etudiant.getText();
         String profInput = (String) profComboBox.getSelectedItem();
+        int yearInput = (int) yearComboBox.getSelectedItem();
         String themeInput = theme.getText();
+        String codeInput = code.getText();
         String resuméInput = resumé.getText();
         byte[] pdfContent = new byte[0];
     try {
@@ -500,8 +597,8 @@ public class form extends JFrame {
 
             // Utilisation d'un PreparedStatement avec des paramètres de substitution
             PreparedStatement st = connection.prepareStatement(
-                "INSERT INTO memoire (titre, auteurs, profEncadrant, theme,pdfContent,resume) " +
-                "VALUES (?, ?, (SELECT id FROM enseignant WHERE fullName = ?), ?,?,?)");
+                "INSERT INTO memoire (titre, auteurs, profEncadrant, theme,pdfContent,resume,annee,Codem) " +
+                "VALUES (?, ?, (SELECT id FROM enseignant WHERE fullName = ?), ?,?,?,?,?)");
 
             // Définir les valeurs des paramètres
             st.setString(1, titreMInput);
@@ -510,6 +607,8 @@ public class form extends JFrame {
             st.setString(4, themeInput);
             st.setBytes(5,pdfContent);
             st.setString(6, resuméInput);
+            st.setInt(7, yearInput);
+            st.setString(8, codeInput);
 
             // Exécuter la requête d'insertion
             int rowsAffected = st.executeUpdate();
@@ -519,8 +618,10 @@ public class form extends JFrame {
                 titreM.setText("");
                 etudiant.setText("");
                 profComboBox.setSelectedIndex(-1);
+                yearComboBox.setSelectedIndex(-1);
                 theme.setText("");
                 resumé.setText("");
+                code.setText("");
             } else {
                 JOptionPane.showMessageDialog(Submit, "Failed to add a new memoire");
             }
@@ -559,6 +660,8 @@ public class form extends JFrame {
         e.printStackTrace();
     }
 }
+
+
 
     private void setComponentSize(JComponent component, int width, int height) {
     component.setPreferredSize(new Dimension(width, height));
