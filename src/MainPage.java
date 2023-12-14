@@ -1,12 +1,13 @@
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.ColorUIResource;
-
-
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.geom.RoundRectangle2D;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MainPage extends JFrame {
   
@@ -106,31 +107,31 @@ public class MainPage extends JFrame {
         search.add(img);
         search.setLayout(new BoxLayout(search, BoxLayout.X_AXIS));
     JPanel titles=new JPanel();
-    JLabel title=new JLabel("Title") ;
-    JLabel Category=new JLabel("Category") ;
-    JLabel auteur=new JLabel("Auteur") ;
-    JLabel theme=new JLabel("Theme") ;
+    JLabel title=new JLabel("Full Name") ;
+    JLabel Category=new JLabel("Specialiter") ;
+    JLabel edite=new JLabel("edite") ;
+    JLabel delete=new JLabel("delete") ;
       Font font = new Font("Inter", Font.PLAIN, 16);
         title.setFont(font);
         Category.setFont(font);
-        auteur.setFont(font);
-        theme.setFont(font);
-     title.setPreferredSize(new Dimension(80, 100));
-      Category.setPreferredSize(new Dimension(80, 100));
-       auteur.setPreferredSize(new Dimension(80, 100));
-        theme.setPreferredSize(new Dimension(80, 100));
+        edite.setFont(font);
+        delete.setFont(font);
+     title.setPreferredSize(new Dimension(100, 100));
+      Category.setPreferredSize(new Dimension(100, 100));
+       edite.setPreferredSize(new Dimension(100, 100));
+        delete.setPreferredSize(new Dimension(100, 100));
     titles.add(title);
-     titles.add(auteur);
-    titles.add(Category);
-    titles.add(theme);
+     titles.add(Category);
+     titles.add(edite);
+    titles.add(delete);
       titles.setLayout(new BoxLayout(titles, BoxLayout.X_AXIS));
         JPanel main = new JPanel();
         ul.setPreferredSize(new Dimension(300, 100));
 
-        JPanel homePanel = createLabelAndIconPanel("Home", resizedIcon1);
-        JPanel bookPanel = createLabelAndIconPanel("Book", resizedIcon2);
-        JPanel memoirePanel = createLabelAndIconPanel("Memoire", resizedIcon5);
-        JPanel settingPanel = createLabelAndIconPanel("Setting", resizedIcon4);
+        JButton homePanel = createLabelAndIconButton("Home", resizedIcon1);
+        JButton bookPanel = createLabelAndIconButton("Book", resizedIcon2);
+        JButton memoirePanel = createLabelAndIconButton("Memoire", resizedIcon5);
+        JButton settingPanel = createLabelAndIconButton("Setting", resizedIcon4);
 
         sideBar.setBackground(Color.WHITE);
         homePanel.setBackground(Color.WHITE);
@@ -142,8 +143,41 @@ public class MainPage extends JFrame {
         ul.add(bookPanel);
         ul.add(memoirePanel);
         ul.add(settingPanel);
-          JPanel contBox=new JPanel();
-       JPanel elmntBox=new JPanel(){
+        CardLayout cardLayout = new CardLayout();
+          JPanel contBox=new JPanel(cardLayout);
+      
+       JPanel techere = new JPanel();
+       JPanel memoire = new JPanel();
+     
+          
+          JPanel home=new JPanel();
+                   
+         
+
+               titles.setLayout(new FlowLayout(FlowLayout.LEFT, 100, 30));
+            contBox.add(home,"Card1");
+            contBox.add(techere,"Card2");
+            contBox.add(memoire,"Card3");
+        //switch card
+        homePanel.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(contBox, "Card1");
+            }
+        });
+        bookPanel.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(contBox, "Card2");
+            }
+        });
+        memoirePanel.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(contBox, "Card3");
+            }
+        });
+        //techere
+         techere.add(titles);
+          for(int i=0;i<16;i++){
+             JPanel elmntBox=new JPanel(){
           @Override
             protected void paintComponent(Graphics g) {
                 Graphics2D g2d = (Graphics2D) g.create();
@@ -162,21 +196,14 @@ public class MainPage extends JFrame {
                 g2d.dispose();
             }
        };
-       elmntBox.setBackground(Color.WHITE);
+         elmntBox.setBackground(Color.WHITE);
            elmntBox.setLayout(new BoxLayout(elmntBox, BoxLayout.X_AXIS));
            elmntBox.setLayout(new FlowLayout(FlowLayout.LEFT, 100, 30));
-          
-             contBox.add(titles);
-               titles.setLayout(new FlowLayout(FlowLayout.LEFT, 100, 30));
-            contBox.add(elmntBox);
-        
-         
-       JLabel titleBox=new JLabel("harry poter");
-       JLabel auteurJLabel=new JLabel("auteur");
-       JLabel CategoryJLabel=new JLabel("Category");
-       JLabel themeJLabel=new JLabel("theme");
+             JLabel titleBox=new JLabel("gaceb kda mna");
+       JLabel auteurJLabel=new JLabel("IA");
       
-       ImageIcon icondeletIcon = new ImageIcon("src\\assets\\trash-solid.png");
+            elmntBox.add(titleBox);
+             ImageIcon icondeletIcon = new ImageIcon("src\\assets\\trash-solid.png");
          
         Image originalImageD = icondeletIcon.getImage();
         Image resizedImageD = originalImageD.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
@@ -237,20 +264,138 @@ public class MainPage extends JFrame {
     }
 
        };
+       JButton btnEdite=new JButton(){
+          @Override
+            protected void paintComponent(Graphics g) {
+                Graphics2D g2d = (Graphics2D) g.create();
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                
+                int width = getWidth();
+                int height = getHeight();
+
+                RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(0, 0, width, height, 20, 20);
+                g2d.setColor(new Color(0xf2, 0x78, 0x51));
+                g2d.fill(roundedRectangle);
+
+                g2d.setColor(Color.WHITE);
+                g2d.draw(roundedRectangle);
+
+                g2d.dispose();
+            }
+            @Override
+    public boolean isFocusPainted() {
+        return false; // Remove focus indication
+    }
+
+    @Override
+    public boolean isBorderPainted() {
+        return false; // Remove default border
+    }
+
+    @Override
+    protected void paintBorder(Graphics g) {
+        // Do not paint the default border
+    }
+
+ 
+    @Override
+    public void setContentAreaFilled(boolean b) {
+        // Avoid painting the background when the button is pressed
+        super.setContentAreaFilled(false);
+    }
+
+    @Override
+    public void setBorderPainted(boolean b) {
+        // Remove the default border
+        super.setBorderPainted(false);
+    }
+    @Override
+    public ButtonModel getModel() {
+        return new DefaultButtonModel() {
+            @Override
+            public boolean isRollover() {
+                return false; // Remove the default rollover effect
+            }
+        };
+    }
+
+       };
+        ImageIcon iconEdit = new ImageIcon("src\\assets\\edit.png");
+         
+        Image originalImageE = iconEdit.getImage();
+        Image resizedImageE = originalImageE.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        ImageIcon resizedIconE = new ImageIcon(resizedImageE);
        JLabel image=new JLabel(resizedIconD);
+       JLabel image3=new JLabel(resizedIconE);
        btndeleButton.add(image);
+       btnEdite.add(image3);
+        titleBox.setPreferredSize(new Dimension(100, 50));
+     auteurJLabel.setPreferredSize(new Dimension(100, 50));
+
+       elmntBox.add(auteurJLabel);
+    
+       elmntBox.add(btnEdite);
+       elmntBox.add(btndeleButton);
+       
+          elmntBox.setPreferredSize(new Dimension(1050, 100));
+ techere.add(elmntBox);}
+
+         //memoire page 
+        memoire.setLayout(new GridLayout(0, 6, 20, 40));
+         memoire.setBorder(new EmptyBorder(50,70,5,70));
+         
+        for(int j=0;j<16;j++){
+        
+             JLabel memoireTitle = new JLabel("Comment avoir 0 en ps");
+         JLabel memoireAuteur=new JLabel("salim ghalem");
+         JPanel image2=new JPanel();
+         JPanel cardMemoire=new JPanel(){
+              @Override
+            protected void paintComponent(Graphics g) {
+                Graphics2D g2d = (Graphics2D) g.create();
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+                int width = getWidth();
+                int height = getHeight();
+
+                RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(0, 0, width, height, 20, 20);
+                g2d.setColor(Color.WHITE);
+                g2d.fill(roundedRectangle);
+
+                g2d.setColor(Color.WHITE);
+                g2d.draw(roundedRectangle);
+
+                g2d.dispose();
+            }
+         };
+         cardMemoire.setLayout(new BoxLayout(cardMemoire, BoxLayout.Y_AXIS));
+        
+
+         cardMemoire.add(image2);
+         cardMemoire.add(Box.createVerticalStrut(20));
+         cardMemoire.add(memoireTitle);
+            cardMemoire.add(Box.createVerticalStrut(5));
+         cardMemoire.add(memoireAuteur);
+         cardMemoire.add(Box.createVerticalStrut(5));
+         memoire.add(cardMemoire);
+         image2.setPreferredSize(new Dimension(80, 200));
+        
        
       
-     titleBox.setPreferredSize(new Dimension(80, 50));
-     auteurJLabel.setPreferredSize(new Dimension(80, 50));
-     CategoryJLabel.setPreferredSize(new Dimension(80, 50));
-     themeJLabel.setPreferredSize(new Dimension(80, 50));
+        
+                
+                     cardMemoire.setBorder(new EmptyBorder(5,5,5,5));
+       
+     cardMemoire.setPreferredSize(new Dimension(90, 210));
+         cardMemoire.setBackground(Color.WHITE);
+        }
      
-       elmntBox.add(titleBox);
-       elmntBox.add(auteurJLabel);
-       elmntBox.add(CategoryJLabel);
-       elmntBox.add(themeJLabel);
-       elmntBox.add(btndeleButton);
+        
+      
+      
+    
+     
+      
         this.add(sideBar, BorderLayout.WEST);
         this.add(main, BorderLayout.CENTER);
         main.add(search, BorderLayout.NORTH);
@@ -280,7 +425,7 @@ public class MainPage extends JFrame {
                 int childWidth = (int) (parentWidth * 0.9);
                 int childWidth2 = (int) (parentWidth * 0.8);
                 searchField.setPreferredSize(new Dimension(childWidth2, 30));
-                elmntBox.setPreferredSize(new Dimension(childWidth, 100));
+             
                 titles.setPreferredSize(new Dimension(childWidth, 100));
                 contBox.setPreferredSize(new Dimension(parentWidth, parentHeight));
                 searchField.setBackground(Color.WHITE);
@@ -292,21 +437,18 @@ public class MainPage extends JFrame {
         setVisible(true);
     }
 
-    private JPanel createLabelAndIconPanel(String labelText, ImageIcon icon) {
-        JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
-        JLabel label = new JLabel(labelText);
-        Font font = new Font("Inter", Font.PLAIN, 20);
-        label.setForeground(Color.decode("#C"));
-        label.setFont(font);
-        if (icon != null) {
-            JLabel iconLabel = new JLabel(icon);
-            panel.add(iconLabel);
-            panel.add(Box.createRigidArea(new Dimension(5, 0)));
-        }
-        panel.setBorder(new EmptyBorder(0, 60, 0, 80));
-        panel.add(label);
-        return panel;
-    }
+  private JButton createLabelAndIconButton(String labelText, ImageIcon icon) {
+    JButton button = new JButton(labelText, icon);
+    Font font = new Font("Inter", Font.PLAIN, 20);
+    button.setForeground(Color.decode("#C"));
+    button.setFont(font);
+    button.setBorderPainted(false);
+    button.setContentAreaFilled(false);
+    
+    
+
+    return button;
+}
 
     public static void main(String[] args) {
         new MainPage();

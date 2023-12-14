@@ -16,6 +16,9 @@ import java.time.Year;
 import org.apache.commons.io.FileUtils;
 
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 public class form extends JFrame {
 
     
@@ -122,6 +125,7 @@ public class form extends JFrame {
         search.setLayout(new BoxLayout(search, BoxLayout.X_AXIS));
 
         JPanel main = new JPanel();
+     
         ul.setPreferredSize(new Dimension(300, 100));
 
         JPanel homePanel = createLabelAndIconPanel("Home", resizedIcon1);
@@ -159,11 +163,15 @@ public class form extends JFrame {
                 g2d.dispose();
             }
         };
+           JPanel teacherMain=new JPanel();
+        JPanel memoireMain=new JPanel();
         elmntBox.setBackground(Color.WHITE);
         elmntBox.setLayout(new BoxLayout(elmntBox, BoxLayout.X_AXIS));
         elmntBox.setLayout(new FlowLayout(FlowLayout.LEFT, 100, 30));
-        contBox.add(elmntBox);
-
+        contBox.add(elmntBox,"card1");
+        contBox.add(teacherMain,"card2");
+        contBox.add(memoireMain,"card3");
+      
         PlaceholderTextField titreM = new PlaceholderTextField("Title");
         JPanel titreMP = new JPanel(){
             @Override
@@ -593,7 +601,7 @@ for (int year = 1999; year <= currentYear; year++) {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/porjet_ihm", "ihm", "ihm");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3307/porjet_ihm", "ihm", "ihm");
 
             // Utilisation d'un PreparedStatement avec des paramètres de substitution
             PreparedStatement st = connection.prepareStatement(
@@ -645,7 +653,7 @@ for (int year = 1999; year <= currentYear; year++) {
             private void populateProfessorComboBox(ComboBoxSuggestion<String> profComboBox) {
     try {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/porjet_ihm", "ihm", "ihm");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3307/porjet_ihm", "ihm", "ihm");
 
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT fullName FROM enseignant");
