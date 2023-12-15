@@ -19,7 +19,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 public class MainPage extends JFrame {
 
     private JPanel titles;
@@ -69,7 +68,10 @@ public class MainPage extends JFrame {
         Image resizedImage2 = originalImage2.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         ImageIcon resizedIcon2 = new ImageIcon(resizedImage2);
 
+     
+
         JLabel label = new JLabel(resizedIcon);
+   
         JPanel logo = new JPanel();
         logo.add(label);
         logo.setBackground(Color.WHITE);
@@ -104,6 +106,10 @@ public class MainPage extends JFrame {
 
         String[] comboBoxItems = {"Item 1", "Item 2", "Item 3", "Item 4"};
         JComboBox<String> comboBox = new JComboBox<String>(comboBoxItems) {};
+        JComboBox<String> ComboBox1 = new JComboBox<String>(comboBoxItems) {};
+        JComboBox<String> ComboBox2 = new JComboBox<String>(comboBoxItems) {};
+      //style combobox
+      //1
       UIManager.put("ComboBox.selectionBackground", new ColorUIResource(Color.ORANGE));
             comboBox.setEditable(true);
         comboBox.setBackground(Color.WHITE);
@@ -112,9 +118,34 @@ public class MainPage extends JFrame {
         comboBox.setBorder(BorderFactory.createEmptyBorder());
         comboBox.setPrototypeDisplayValue("Prototype");
        comboBox.setBackground(Color.WHITE);
-       
-       
+       //2
+         UIManager.put("ComboBox1.selectionBackground", new ColorUIResource(Color.ORANGE));
+            ComboBox1.setEditable(true);
+        ComboBox1.setBackground(Color.WHITE);
+        ComboBox1.setForeground(Color.BLACK);
+        ComboBox1.setBorder(null);
+           
+        ComboBox1.setBorder(BorderFactory.createEmptyBorder());
+        ComboBox1.setPrototypeDisplayValue("Prototype");
+       ComboBox1.setBackground(Color.WHITE);
+       //3
+         UIManager.put("ComboBox2.selectionBackground", new ColorUIResource(Color.ORANGE));
+            ComboBox2.setEditable(true);
+        ComboBox2.setBackground(Color.WHITE);
+        ComboBox2.setForeground(Color.BLACK);
+        ComboBox2.setBorder(null);
+           
+        ComboBox2.setBorder(BorderFactory.createEmptyBorder());
+        ComboBox2.setPrototypeDisplayValue("Prototype");
+       ComboBox2.setBackground(Color.WHITE);
+       //haut conetent
+       JPanel contentPane = new JPanel() ;
+       contentPane.add(search);
+
+
         search.add(comboBox);
+        contentPane.add(ComboBox1);
+        contentPane.add(ComboBox2);
 
         search.add(searchField);
         JLabel img = new JLabel(resizedIcon6);
@@ -183,6 +214,7 @@ public class MainPage extends JFrame {
        JPanel techere = new JPanel();
        JPanel memoire = new JPanel();
        JPanel home=new JPanel();
+       
                    
          
 
@@ -274,10 +306,9 @@ public class MainPage extends JFrame {
         
         main.add(contBox, BorderLayout.CENTER);
     
-        int parentWidth = main.getWidth();
-        int childWidth = (int) (parentWidth * 0.8);
+      
         search.setBorder(new EmptyBorder(padding, padding, padding, padding));
-        search.setPreferredSize(new Dimension(childWidth, 50));
+        
         sideBar.setLayout(new BoxLayout(sideBar, BoxLayout.Y_AXIS));
         sideBar.add(logo);
         sideBar.add(Box.createVerticalStrut(5));
@@ -302,7 +333,8 @@ public class MainPage extends JFrame {
                 memoiretitles.setPreferredSize(new Dimension(childWidth, 50));
                 contBox.setPreferredSize(new Dimension(parentWidth, parentHeight));
                 searchField.setBackground(Color.WHITE);
-                search.setPreferredSize(new Dimension(childWidth, 50));
+                contentPane.setPreferredSize(new Dimension(childWidth, 100));
+                search.setPreferredSize(new Dimension((childWidth*2)/3, 50));
                 search.revalidate();
             }
         });
