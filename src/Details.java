@@ -1,15 +1,17 @@
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.ColorUIResource;
+import javax.swing.plaf.basic.BasicScrollBarUI;
+
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-public class MainPage extends JFrame {
+public class Details extends JFrame {
   
-    public MainPage() {
+    public Details() {
         this.setTitle("My Book Shelf");
         setSize(1500, 1000);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -180,12 +182,143 @@ public class MainPage extends JFrame {
        JPanel memoire = new JPanel();
      
           
-          JPanel home=new JPanel();
-       
-                   
-         
+          JPanel home=new JPanel(); 
 
+
+          //////
+          ///////
+          ////// DETAILS PAGE 
+         JPanel details=new JPanel(); 
+         //card
+         JButton Ouvrir = new JButton("Ouvrir");
+         Ouvrir.setBackground(Color.decode("#fa7c54"));
+         Ouvrir.setForeground(Color.WHITE);
+      
+         JPanel BottomCard=new JPanel();
+         JPanel imageD=new JPanel();
+         JPanel cardMemoire2=new JPanel(){
+              @Override
+            protected void paintComponent(Graphics g) {
+                Graphics2D g2d = (Graphics2D) g.create();
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+                int width = getWidth();
+                int height = getHeight();
+
+                RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(0, 0, width, height, 20, 20);
+                g2d.setColor(Color.WHITE);
+                g2d.fill(roundedRectangle);
+
+                g2d.setColor(Color.WHITE);
+                g2d.draw(roundedRectangle);
+
+                g2d.dispose();
+            }
+         };
+         cardMemoire2.setLayout(new BoxLayout(cardMemoire2, BoxLayout.Y_AXIS));
+        
+
+         cardMemoire2.add(imageD);
+         cardMemoire2.add(Box.createVerticalStrut(20));
+         cardMemoire2.add(BottomCard);
+         BottomCard.add(Ouvrir);
+        cardMemoire2.add(Box.createVerticalStrut(5));
+       
+        BottomCard.setBackground(Color.WHITE);
+        imageD.setPreferredSize(new Dimension(300,400));
+        cardMemoire2.setBorder(new EmptyBorder(15,15,15,15)); 
+        cardMemoire2.setPreferredSize(new Dimension(350, 510));
+        cardMemoire2.setBackground(Color.WHITE);
+        Ouvrir.setBorder(new EmptyBorder(10, 40, 10, 40));  
+        
+        // right 
+        
+        //info
+        JPanel Right =new JPanel();
+        Right.setBorder(new EmptyBorder(0, 20, 0, 0));  
+          Right.setPreferredSize(new Dimension(600,510));
+          Font font2 = new Font("Inter", Font.PLAIN, 30);
+          Font font3 = new Font("Inter", Font.PLAIN, 20);
+        JLabel Id=new JLabel("Id: 12 ");
+        Id.setFont(font3);
+        JLabel titleD=new JLabel("TITRE TU CONNAIS ");
+       titleD.setFont(font2);
+        JLabel AuteurD=new JLabel("Auteur: double s skara f soundous");
+         AuteurD.setFont(font3);
+        JLabel encardarntD=new JLabel("Encardarnt: Mr stl3");
+              encardarntD.setFont(font3);   
+        Id.setPreferredSize(new Dimension(570,50));
+        titleD.setPreferredSize(new Dimension(570,50));
+        AuteurD.setPreferredSize(new Dimension(570,50));
+        encardarntD.setPreferredSize(new Dimension(570,50));
+  
+        //resumer
+        
+        JPanel resumerJPanel=new JPanel(){
+              @Override
+            protected void paintComponent(Graphics g) {
+                Graphics2D g2d = (Graphics2D) g.create();
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+                int width = getWidth();
+                int height = getHeight();
+
+                RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(0, 0, width, height, 20, 20);
+                g2d.setColor(Color.WHITE);
+                g2d.fill(roundedRectangle);
+
+                g2d.setColor(Color.WHITE);
+                g2d.draw(roundedRectangle);
+
+                g2d.dispose();
+            }
+        };
+       
+             resumerJPanel.setBorder(new EmptyBorder(20, 20, 20, 20));  
+             JLabel resumerTitle=new JLabel("Resumer");
+             resumerTitle.setFont(font2);
+             resumerTitle.setForeground(Color.decode("#fa7c54"));
+        JTextArea resumerd=new JTextArea("Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem jjsjsjsjjsjjsjsjsjjsjsjsjsjsjsjsjjssj jssjsjsj jsjsj zkoej jen jnie zeidei eidiejfi dizid ndinez nieijieddjeidn jlagetbd dkp sokjd i kdjdzo kdodked Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem jjsjsjsjjsjjsjsjsjjsjsjsjsjsjsjsjjssj jssjsjsj jsjsj zkoej jen jnie zeidei eidiejfi dizid ndinez nieijieddjeidn jlagetbd dkp sokjd i kdjdzo kdodkedLorem ipsum dolor sit amet, consectetur adipiscing elit Lorem jjsjsjsjjsjjsjsjsjjsjsjsjsjsjsjsjjssj jssjsjsj jsjsj zkoej jen jnie zeidei eidiejfi dizid ndinez nieijieddjeidn jlagetbd dkp sokjd i kdjdzo kdodked Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem jjsjsjsjjsjjsjsjsjjsjsjsjsjsjsjsjjssj jssjsjsj jsjsj zkoej jen jnie zeidei eidiejfi dizid ndinez nieijieddjeidn jlagetbd dkp sokjd i kdjdzo kdodked jjsjsjsjsjsjsjsjjssj jssjsjsj jsjsj zkoej jen jnie zeidei eidiejfi dizid ndinez nieijieddjeidn jlagetbd dkp sokjd i kdjdzo kdodked Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem jjsjsjsjjsjjsjsjsjjsjsjsjsjsjsjsjjssj jssjsjsj jsjsj zkoej jen jnie zeidei eidiejfi dizid ndinez nieijieddjeidn jlagetbd dkp sokjd i kdjdzo kdodked p sokjd i kdjdzo kdodked Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem jjsjsjsjjsjjsjsjsjjsjsjsjsjsjsjsjjssj jssjsjsj jsjsj zkoej jen jnie zeidei eidiejfi dizid ndinez nieijieddjeidn jlagetbd dkp sokjd i kdjdzo kdodkep sokjd i kdjdzo kdodked Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem jjsjsjsjjsjjsjsjsjjsjsjsjsjsjsjsjjssj jssjsjsj jsjsj zkoej jen jnie zeidei eidiejfi dizid ndinez nieijieddjeidn jlagetbd dkp sokjd i kdjdzo kdodke jjsjsjsjjsjsjsjsjsjsjsjjssj jssjsjsj jsjsj zkoej jen jnie zeidei eidiejfi dizid ndinez nieijieddjeidn jlagetbd dkp sokjd i k jjsjsjsjjsjsjsjsjsjsjsjjssj jssjsjsj jsjsj zkoej jen jnie zeidei eidiejfi dizid ndinez nieijieddjeidn jlagetbd dkp sokjd i k jjsjsjsjjsjsjsjsjsjsjsjjssj jssjsjsj jsjsj zkoej jen jnie zeidei eidiejfi dizid ndinez nieijieddjeidn jlagetbd dkp sokjd i k");
+         JScrollPane scrollPane=new JScrollPane(resumerd);
+        resumerd.setLineWrap(true);
+        resumerd.setEditable(false);
+       
+        
+        scrollPane.setPreferredSize(new Dimension(550,200));
+        scrollPane.getVerticalScrollBar().setBackground(Color.WHITE);
+        scrollPane.getHorizontalScrollBar().setBackground(Color.WHITE);
+        javax.swing.UIManager.put("ScrollBar.thumb", new javax.swing.plaf.ColorUIResource(250,124,84));
+javax.swing.UIManager.put("Button.foreground", new javax.swing.plaf.ColorUIResource(250,124,84));
+          scrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
+    @Override
+    protected void configureScrollBarColors() {
+        this.thumbColor = Color.decode("#fa7c54");
+    }
+});
+        resumerJPanel.setPreferredSize(new Dimension(570,280));
+     
+        resumerJPanel.setBackground(Color.WHITE);;
+        
+      //add 
+    resumerJPanel.add(resumerTitle); 
+    
+    resumerJPanel.add(scrollPane); 
+   
+     
+      Right.add(titleD); 
+       Right.add(Id); 
+      Right.add(AuteurD); 
+      Right.add(encardarntD); 
+      Right.add(resumerJPanel); 
+       details.add(cardMemoire2);
+      
+       details.add(Right);
+
+
+         
+         ///////// FIN DETAILS
                titles.setLayout(new FlowLayout(FlowLayout.LEFT, 100, 30));
+            contBox.add(details,"details");
             contBox.add(home,"Card1");
             contBox.add(techere,"Card2");
             contBox.add(memoire,"Card3");
@@ -482,6 +615,6 @@ public class MainPage extends JFrame {
 }
 
     public static void main(String[] args) {
-        new MainPage();
+        new Details();
     }
 }
