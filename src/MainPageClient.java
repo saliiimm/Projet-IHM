@@ -496,7 +496,6 @@ private JPanel createListElementMemoire(String pfe, JPanel memoire, JScrollPane 
        String pfereference = pfeInfo[4];
        String profId = pfeInfo[3];
      
-
         JLabel pfetitle = new JLabel(pfeetitle);
         JLabel pfeauthors = new JLabel(author);
 
