@@ -181,10 +181,10 @@ public class LogIn extends JFrame {
                     e1.printStackTrace();
                 }
                 try {
-                    Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3307/porjet_ihm",
+                    Connection connection3 = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/porjet_ihm",
                         "ihm", "ihm");
 
-                    PreparedStatement st = (PreparedStatement) connection
+                    PreparedStatement st = (PreparedStatement) connection3
                         .prepareStatement("Select username, password from admin where username=? and password=?");
 
                     st.setString(1, userName);

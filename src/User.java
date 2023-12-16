@@ -1,6 +1,7 @@
 import javax.swing.*;
 import javax.swing.border.Border;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.*;
 public class User extends JFrame  {
@@ -113,6 +114,25 @@ public class User extends JFrame  {
       User_Admin.setLayout(new GridLayout());
       User_Etudiant.setLayout(new GridLayout());
     
+      User_Admin.addActionListener( new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+       
+                        dispose();
+                        LogIn ah = new LogIn();
+                        ah.setVisible(true);                 
+    }
+});
+
+   User_Etudiant.addActionListener( new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+       
+                        dispose();
+                        MainPageClient av= new MainPageClient();
+                        av.setVisible(true);                 
+    }
+});
 
       Border roundedBorder = BorderFactory.createLineBorder(Color.decode("#fa7c54"), 2, true);
       User_Admin.setBorder(BorderFactory.createCompoundBorder(
